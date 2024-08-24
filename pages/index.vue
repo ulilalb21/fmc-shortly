@@ -1,15 +1,63 @@
 <template>
   <nav class="fixed z-10 w-full bg-white">
-    <div class="container px-6 py-8">
-      <NuxtImg src="/images/logo.svg" alt="shortly logo" class="h-8" />
-      <!-- <h1 class="text-4xl font-bold text-gray-700">Shortly</h1> -->
+    <div class="container px-6 pb-4 pt-8">
+      <div class="relative flex items-center justify-between">
+        <NuxtImg src="/images/logo.svg" alt="shortly logo" class="h-8" />
+        <UIcon
+          name="i-heroicons-bars-3"
+          class="h-10 w-10 cursor-pointer text-gray-400"
+          @click="showNav = !showNav"
+        />
+        <div
+          :class="{ hidden: !showNav }"
+          class="absolute top-14 w-full rounded-md bg-[#35323e] p-4 pb-8 text-center text-sm font-semibold text-white"
+        >
+          <UButton
+            v-for="nav in topNav"
+            :key="nav"
+            block
+            variant="link"
+            size="md"
+            color="white"
+            to="#"
+            class="mt-2"
+          >
+            {{ nav }}
+          </UButton>
+          <div class="mt-2 border-t border-gray-600" />
+          <UButton
+            class="mt-2"
+            block
+            variant="link"
+            size="md"
+            color="white"
+            to="#"
+          >
+            Login
+          </UButton>
+          <UButton
+            class="mt-2"
+            block
+            size="md"
+            :ui="{
+              font: 'font-semibold tracking-wider',
+              rounded: 'rounded-full',
+              padding: {
+                base: 'py-4',
+              },
+            }"
+          >
+            Sign Up
+          </UButton>
+        </div>
+      </div>
     </div>
   </nav>
   <div class="pt-[104px]">
     <NuxtImg
       src="/images/illustration-working.svg"
       alt="illustration"
-      class="h-[350px] w-full overflow-hidden object-cover object-left pl-6"
+      class="h-[350px] w-full overflow-hidden object-cover object-left pl-6 md:h-[550px]"
     />
     <section class="bg-white px-4 text-center">
       <h2 class="mt-10 text-5xl font-bold tracking-tighter text-gray-700">
@@ -20,6 +68,7 @@
         links are performing.
       </p>
       <UButton
+        to="#shorten-link"
         class="text-white"
         size="xl"
         :ui="{
@@ -36,7 +85,7 @@
       >
       <section
         id="shorten-link"
-        class="relative -bottom-16 mx-6 rounded-xl bg-gray-800 bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
+        class="relative -bottom-16 mx-2 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
       >
         <UInput
           class="w-full"
@@ -137,7 +186,7 @@
       <div>&nbsp</div>
     </section>
     <section
-      class="bg-gray-700 bg-[url('/images/bg-boost-mobile.svg')] py-20 text-center"
+      class="bg-[#35323e] bg-[url('/images/bg-boost-mobile.svg')] bg-cover bg-right-top bg-no-repeat py-20 text-center"
     >
       <h2 class="text-2xl font-bold text-white">Boost your links today</h2>
       <UButton
@@ -204,6 +253,9 @@ const footerLinks = {
   Company: ["About", "Our Team", "Careers", "Contact"],
 };
 const socialLinks = ["facebook", "twitter", "pinterest", "instagram"];
+const topNav = ["Features", "Pricing", "Resources"];
+
+const showNav = ref(false);
 </script>
 <style>
 body {
