@@ -9,7 +9,7 @@
     <NuxtImg
       src="/images/illustration-working.svg"
       alt="illustration"
-      class="ml-6 h-[350px] w-full object-cover object-left"
+      class="h-[350px] w-full overflow-hidden object-cover object-left pl-6"
     />
     <section class="bg-white px-4 text-center">
       <h2 class="mt-10 text-5xl font-bold tracking-tighter text-gray-700">
