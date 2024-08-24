@@ -85,7 +85,7 @@
       >
       <section
         id="shorten-link"
-        class="relative -bottom-16 mx-2 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
+        class="relative -bottom-16 mx-2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
       >
         <UInput
           class="w-full"
@@ -140,6 +140,9 @@
           Boost your brand recognition with each click. Generic links don’t mean
           a thing. Branded links help instil confidence in your content.
         </p>
+        <div
+          class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
+        />
       </div>
       <div
         id="detailed-records"
@@ -161,6 +164,9 @@
           Gain insights into who is clicking your links. Knowing when and where
           people engage with your content helps inform better decisions.
         </p>
+        <div
+          class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
+        />
       </div>
       <div
         id="fully-customizable"
