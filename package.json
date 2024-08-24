@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/fonts": "^0.7.2",
+    "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.18.4",
     "nuxt": "^3.12.4",
     "prettier": "^3.3.3",
