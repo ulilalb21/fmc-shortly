@@ -53,13 +53,13 @@
       </div>
     </div>
   </nav>
-  <div class="pt-[104px]">
+  <main class="pt-[104px]">
     <NuxtImg
       src="/images/illustration-working.svg"
       alt="illustration"
       class="h-[350px] w-full overflow-hidden object-cover object-left pl-6 md:h-[550px]"
     />
-    <section class="bg-white px-4 text-center">
+    <section class="bg-white px-4 pb-40 text-center">
       <h2 class="mt-10 text-5xl font-bold tracking-tighter text-gray-700">
         More than just shorter links
       </h2>
@@ -83,34 +83,61 @@
         }"
         >Get Started</UButton
       >
+    </section>
+    <section class="relative bg-gray-100 px-6 text-center">
       <section
         id="shorten-link"
-        class="relative -bottom-16 mx-2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
+        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
       >
-        <UInput
-          class="w-full"
-          placeholder="Shorten a link here..."
-          color="white"
-          size="xl"
-        />
-        <UButton
-          block
-          class="mt-4"
-          size="lg"
-          :ui="{
-            font: 'font-semibold tracking-wider',
-            size: {
-              lg: 'text-lg',
-            },
-            padding: {
-              lg: 'py-2 px-10',
-            },
-          }"
-          >Shorten It!</UButton
-        >
+        <div class="">
+          <UInput
+            class="w-full"
+            placeholder="Shorten a link here..."
+            color="white"
+            size="xl"
+            v-model="link"
+          />
+          <UButton
+            @click="submitLink"
+            block
+            class="mt-4"
+            size="lg"
+            :ui="{
+              font: 'font-semibold tracking-wider',
+              size: {
+                lg: 'text-lg',
+              },
+              padding: {
+                lg: 'py-2 px-10',
+              },
+            }"
+            >Shorten It!</UButton
+          >
+        </div>
       </section>
-    </section>
-    <section class="bg-gray-100 px-6 text-center">
+      <div v-if="links.length" class="text-left text-lg font-semibold">
+        <div
+          v-for="link in links"
+          :key="link.result"
+          class="mt-6 rounded-lg bg-white"
+        >
+          <div class="border-b p-4">
+            <div class="line-clamp-1">
+              {{ link.source }}
+            </div>
+          </div>
+          <div class="px-4 pb-4 pt-4">
+            <a
+              :href="link.result"
+              target="_blank"
+              class="line-clamp-1 text-cyan-500 hover:underline hover:decoration-cyan-500"
+            >
+              {{ link.result }}
+            </a>
+            <UButton block size="lg" class="mt-3">Copy</UButton>
+          </div>
+        </div>
+      </div>
       <div class="pb-20 pt-32">
         <h2 class="text-3xl font-bold tracking-tighter text-gray-700">
           Advanced Statistics
@@ -196,6 +223,7 @@
     >
       <h2 class="text-2xl font-bold text-white">Boost your links today</h2>
       <UButton
+        to="#shorten-link"
         class="mt-6 text-white"
         size="xl"
         :ui="{
@@ -249,7 +277,7 @@
         />
       </div>
     </footer>
-  </div>
+  </main>
 </template>
 
 <script lang="ts" setup>
@@ -262,6 +290,17 @@ const socialLinks = ["facebook", "twitter", "pinterest", "instagram"];
 const topNav = ["Features", "Pricing", "Resources"];
 
 const showNav = ref(false);
+
+const link = ref("");
+
+function submitLink() {
+  if (!link.value) return;
+  links.value.unshift({ source: link.value, result: link.value });
+  link.value = "";
+}
+
+type ShortenedLink = { source: string; result: string };
+const links = ref<ShortenedLink[]>([]);
 </script>
 <style>
 body {
