@@ -3,53 +3,55 @@
     <div class="container px-6 pb-4 pt-8">
       <div class="relative flex items-center justify-between">
         <NuxtImg src="/images/logo.svg" alt="shortly logo" class="h-8" />
-        <UIcon
-          name="i-heroicons-bars-3"
-          class="h-10 w-10 cursor-pointer text-gray-400"
-          @click="showNav = !showNav"
-        />
-        <div
-          :class="{ hidden: !showNav }"
-          class="absolute top-14 w-full rounded-md bg-[#35323e] p-4 pb-8 text-center text-sm font-semibold text-white"
-        >
-          <UButton
-            v-for="nav in topNav"
-            :key="nav"
-            block
-            variant="link"
-            size="md"
-            color="white"
-            to="#"
-            class="mt-2"
+        <OnClickOutside @trigger="showNav = false">
+          <UIcon
+            name="i-heroicons-bars-3"
+            class="h-10 w-10 cursor-pointer text-gray-400"
+            @click="showNav = !showNav"
+          />
+          <div
+            :class="{ hidden: !showNav }"
+            class="absolute left-0 top-14 w-full rounded-md bg-[#35323e] p-4 pb-8 text-center text-sm font-semibold text-white"
           >
-            {{ nav }}
-          </UButton>
-          <div class="mt-2 border-t border-gray-600" />
-          <UButton
-            class="mt-2"
-            block
-            variant="link"
-            size="md"
-            color="white"
-            to="#"
-          >
-            Login
-          </UButton>
-          <UButton
-            class="mt-2"
-            block
-            size="md"
-            :ui="{
-              font: 'font-semibold tracking-wider',
-              rounded: 'rounded-full',
-              padding: {
-                base: 'py-4',
-              },
-            }"
-          >
-            Sign Up
-          </UButton>
-        </div>
+            <UButton
+              v-for="nav in topNav"
+              :key="nav"
+              block
+              variant="link"
+              size="md"
+              color="white"
+              to="#"
+              class="mt-2"
+            >
+              {{ nav }}
+            </UButton>
+            <div class="mt-2 border-t border-gray-600" />
+            <UButton
+              class="mt-2"
+              block
+              variant="link"
+              size="md"
+              color="white"
+              to="#"
+            >
+              Login
+            </UButton>
+            <UButton
+              class="mt-2"
+              block
+              size="md"
+              :ui="{
+                font: 'font-semibold tracking-wider',
+                rounded: 'rounded-full',
+                padding: {
+                  base: 'py-4',
+                },
+              }"
+            >
+              Sign Up
+            </UButton>
+          </div>
+        </OnClickOutside>
       </div>
     </div>
   </nav>
@@ -282,6 +284,8 @@
 </template>
 
 <script lang="ts" setup>
+import { OnClickOutside } from "@vueuse/components";
+
 const footerLinks = {
   Features: ["Link Shortening", "Branded Links", "Analytics"],
   Resources: ["Blog", "Developers", "Support"],
@@ -291,13 +295,26 @@ const socialLinks = ["facebook", "twitter", "pinterest", "instagram"];
 const topNav = ["Features", "Pricing", "Resources"];
 
 const showNav = ref(false);
+watch(showNav, () => {
+  console.log(showNav.value);
+});
 
 const link = ref("");
 
-function submitLink() {
+async function submitLink() {
   if (!link.value) return;
-  links.value.unshift({ source: link.value, result: link.value });
-  link.value = "";
+  try {
+    const { result_url: result } = await $fetch("/api/shorten", {
+      method: "POST",
+      body: {
+        url: link.value,
+      },
+    });
+    links.value.unshift({ source: link.value, result });
+    link.value = "";
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 type ShortenedLink = { source: string; result: string };
