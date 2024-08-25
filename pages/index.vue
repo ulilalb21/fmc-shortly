@@ -347,6 +347,8 @@ async function submitLink(event: Event) {
       },
     });
     links.value.unshift({ source: state.link, result });
+    localStorage.setItem("fmc-shortly", JSON.stringify(links.value));
+
     state.link = "";
   } catch (error) {
     if (error && error.statusCode === 400) {
@@ -369,6 +371,9 @@ async function submitLink(event: Event) {
 
 type ShortenedLink = { source: string; result: string };
 const links = ref<ShortenedLink[]>([]);
+onMounted(() => {
+  links.value = JSON.parse(localStorage.getItem("fmc-shortly") || "[]");
+});
 </script>
 <style>
 body {
