@@ -145,7 +145,7 @@
                 block
                 size="lg"
                 :class="copied ? 'bg-gray-700 hover:bg-gray-600' : ''"
-                class="mt-3"
+                class="mt-3 font-semibold tracking-wide"
                 @click="copy()"
                 :disabled="!isSupported"
               >
