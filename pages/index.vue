@@ -111,11 +111,12 @@
                 lg: 'py-2 px-10',
               },
             }"
-            >Shorten It!</UButton
           >
+            Shorten It!
+          </UButton>
         </div>
       </section>
-      <div v-if="links.length" class="text-left text-lg font-semibold">
+      <div v-if="links.length" class="pt-20 text-left text-lg font-semibold">
         <div
           v-for="link in links"
           :key="link.result"
@@ -138,7 +139,7 @@
           </div>
         </div>
       </div>
-      <div class="pb-20 pt-32">
+      <div :class="links.length ? 'pt-14' : 'pt-32'" class="pb-20">
         <h2 class="text-3xl font-bold tracking-tighter text-gray-700">
           Advanced Statistics
         </h2>
