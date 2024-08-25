@@ -137,7 +137,21 @@
             >
               {{ link.result }}
             </a>
-            <UButton block size="lg" class="mt-3">Copy</UButton>
+            <UseClipboard
+              :source="link.result"
+              v-slot="{ copied, copy, isSupported }"
+            >
+              <UButton
+                block
+                size="lg"
+                :class="copied ? 'bg-gray-700 hover:bg-gray-600' : ''"
+                class="mt-3"
+                @click="copy()"
+                :disabled="!isSupported"
+              >
+                {{ copied ? "Copied!" : "Copy" }}
+              </UButton>
+            </UseClipboard>
           </div>
         </div>
       </div>
@@ -284,7 +298,7 @@
 </template>
 
 <script lang="ts" setup>
-import { OnClickOutside } from "@vueuse/components";
+import { OnClickOutside, UseClipboard } from "@vueuse/components";
 
 const footerLinks = {
   Features: ["Link Shortening", "Branded Links", "Analytics"],
