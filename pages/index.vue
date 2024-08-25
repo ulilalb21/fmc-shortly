@@ -89,18 +89,32 @@
     <section class="relative bg-gray-100 px-6 text-center">
       <section
         id="shorten-link"
-        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-contain bg-right-top bg-no-repeat p-6"
+        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6"
       >
-        <div class="">
-          <UInput
-            class="w-full"
-            placeholder="Shorten a link here..."
-            color="white"
-            size="xl"
-            v-model="link"
-          />
+        <UForm
+          ref="form"
+          @submit="submitLink"
+          :state="state"
+          :validate="validate"
+          :validate-on="['submit']"
+        >
+          <UFormGroup name="link" class="text-left italic">
+            <UInput
+              class="w-full"
+              placeholder="Shorten a link here..."
+              color="white"
+              variant="outline"
+              size="xl"
+              :ui="{
+                variant: {
+                  outline: 'bg-white placeholder-{color}-300',
+                },
+              }"
+              v-model="state.link"
+            />
+          </UFormGroup>
           <UButton
-            @click="submitLink"
+            type="submit"
             block
             class="mt-4"
             size="lg"
@@ -116,7 +130,7 @@
           >
             Shorten It!
           </UButton>
-        </div>
+        </UForm>
       </section>
       <div v-if="links.length" class="pt-20 text-left text-lg font-semibold">
         <div
@@ -298,6 +312,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { FormError, FormErrorEvent, FormSubmitEvent } from "#ui/types";
 import { OnClickOutside, UseClipboard } from "@vueuse/components";
 
 const footerLinks = {
@@ -313,21 +328,42 @@ watch(showNav, () => {
   console.log(showNav.value);
 });
 
-const link = ref("");
+const form = ref();
+const state = reactive({
+  link: "",
+});
+const validate = (state: any): FormError[] => {
+  const errors = [];
+  if (!state.link) errors.push({ path: "link", message: "Please add a link" });
+  return errors;
+};
 
-async function submitLink() {
-  if (!link.value) return;
+async function submitLink(event: Event) {
   try {
     const { result_url: result } = await $fetch("/api/shorten", {
       method: "POST",
       body: {
-        url: link.value,
+        url: state.link.trim(),
       },
     });
-    links.value.unshift({ source: link.value, result });
-    link.value = "";
+    links.value.unshift({ source: state.link, result });
+    state.link = "";
   } catch (error) {
-    console.error(error);
+    if (error && error.statusCode === 400) {
+      form.value.setErrors([
+        {
+          path: "link",
+          message: "Invalid URL",
+        },
+      ]);
+      return;
+    }
+    form.value.setErrors([
+      {
+        path: "link",
+        message: "Something went wrong",
+      },
+    ]);
   }
 }
 
