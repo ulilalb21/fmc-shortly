@@ -13,4 +13,9 @@ export default defineNuxtConfig({
       Poppins: [400, 500, 600, 700, 800],
     },
   },
+  router: {
+    options: {
+      scrollBehaviorType: "smooth",
+    },
+  },
 });
