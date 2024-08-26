@@ -155,7 +155,7 @@
     <section class="relative bg-gray-100 px-6 text-center">
       <section
         id="shorten-link"
-        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6 md:-top-14 md:bg-[url('/images/bg-shorten-desktop.svg')] md:p-8"
+        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6 md:-top-14 md:bg-[url('/images/bg-shorten-desktop.svg')] md:p-8 lg:scroll-mt-28 lg:p-10"
       >
         <UForm
           ref="form"
@@ -165,7 +165,7 @@
           :validate="validate"
           :validate-on="['submit']"
         >
-          <UFormGroup name="link" class="text-left italic md:basis-2/3">
+          <UFormGroup name="link" class="text-left italic md:basis-full">
             <UInput
               class="w-full"
               placeholder="Shorten a link here..."
@@ -184,7 +184,7 @@
             color="cyan"
             type="submit"
             block
-            class="mt-4 md:mt-0 md:basis-1/3"
+            class="mt-4 md:mt-0 md:basis-[190px]"
             size="lg"
             :ui="{
               font: 'font-semibold tracking-wider',
@@ -200,18 +200,21 @@
           </UButton>
         </UForm>
       </section>
-      <div v-if="links.length" class="pt-20 text-left text-lg font-semibold">
+      <div
+        v-if="links.length"
+        class="container mx-auto pt-20 text-left text-lg font-semibold"
+      >
         <div
           v-for="link in links"
           :key="link.result"
-          class="mt-6 rounded-lg bg-white lg:flex lg:flex-row lg:items-center lg:p-6"
+          class="mt-6 rounded-lg bg-white lg:flex lg:flex-row lg:items-center lg:p-6 lg:py-4"
         >
-          <div class="border-b p-4 lg:basis-2/3 lg:border-b-0 lg:p-0">
+          <div class="border-b p-4 lg:basis-full lg:border-b-0 lg:p-0">
             <div class="line-clamp-1">
               {{ link.source }}
             </div>
           </div>
-          <div class="px-4 pb-4 pt-4 lg:basis-1/3 lg:p-0">
+          <div class="px-4 py-4 lg:flex lg:items-center lg:gap-8 lg:p-0">
             <a
               :href="link.result"
               target="_blank"
@@ -225,10 +228,20 @@
             >
               <UButton
                 color="cyan"
+                size="lg"
+                :class="copied ? 'bg-gray-700 hover:bg-gray-600' : ''"
+                class="hidden w-[100px] font-semibold tracking-wide lg:block"
+                @click="copy()"
+                :disabled="!isSupported"
+              >
+                {{ copied ? "Copied!" : "Copy" }}
+              </UButton>
+              <UButton
+                color="cyan"
                 block
                 size="lg"
                 :class="copied ? 'bg-gray-700 hover:bg-gray-600' : ''"
-                class="mt-3 font-semibold tracking-wide"
+                class="mt-3 font-semibold tracking-wide lg:hidden"
                 @click="copy()"
                 :disabled="!isSupported"
               >
@@ -238,85 +251,87 @@
           </div>
         </div>
       </div>
-      <div :class="links.length ? 'pt-14' : 'pt-32'" class="pb-20">
-        <h2 class="text-3xl font-bold tracking-tighter text-gray-700">
-          Advanced Statistics
-        </h2>
-        <p class="text-md mt-6 font-medium text-gray-400">
-          Track how your links are performing across the web with our advanced
-          statistics dashboard.
-        </p>
-      </div>
-      <div
-        id="brand-recognition"
-        class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-      >
+      <div class="container mx-auto">
+        <div :class="links.length ? 'pt-14 lg:pt-28' : 'pt-32'" class="pb-20">
+          <h2 class="text-3xl font-bold tracking-tighter text-gray-700">
+            Advanced Statistics
+          </h2>
+          <p class="text-md mx-auto mt-6 w-[450px] font-medium text-gray-400">
+            Track how your links are performing across the web with our advanced
+            statistics dashboard.
+          </p>
+        </div>
         <div
-          class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          id="brand-recognition"
+          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
         >
-          <NuxtImg
-            class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-            src="/images/icon-brand-recognition.svg"
-            alt="brand-recognition"
+          <div
+            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          >
+            <NuxtImg
+              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+              src="/images/icon-brand-recognition.svg"
+              alt="brand-recognition"
+            />
+          </div>
+          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+            Brand Recognition
+          </h2>
+          <p class="text-md mt-4 font-medium text-gray-400">
+            Boost your brand recognition with each click. Generic links don’t
+            mean a thing. Branded links help instil confidence in your content.
+          </p>
+          <div
+            class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
           />
         </div>
-        <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-          Brand Recognition
-        </h2>
-        <p class="text-md mt-4 font-medium text-gray-400">
-          Boost your brand recognition with each click. Generic links don’t mean
-          a thing. Branded links help instil confidence in your content.
-        </p>
         <div
-          class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
-        />
-      </div>
-      <div
-        id="detailed-records"
-        class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-      >
-        <div
-          class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          id="detailed-records"
+          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
         >
-          <NuxtImg
-            class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-            src="/images/icon-detailed-records.svg"
-            alt="detailed-records"
+          <div
+            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          >
+            <NuxtImg
+              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+              src="/images/icon-detailed-records.svg"
+              alt="detailed-records"
+            />
+          </div>
+          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+            Detailed Records
+          </h2>
+          <p class="text-md mt-4 font-medium text-gray-400">
+            Gain insights into who is clicking your links. Knowing when and
+            where people engage with your content helps inform better decisions.
+          </p>
+          <div
+            class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
           />
         </div>
-        <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-          Detailed Records
-        </h2>
-        <p class="text-md mt-4 font-medium text-gray-400">
-          Gain insights into who is clicking your links. Knowing when and where
-          people engage with your content helps inform better decisions.
-        </p>
         <div
-          class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
-        />
-      </div>
-      <div
-        id="fully-customizable"
-        class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-      >
-        <div
-          class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          id="fully-customizable"
+          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
         >
-          <NuxtImg
-            class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-            src="/images/icon-fully-customizable.svg"
-            alt="fully-customizable"
-          />
+          <div
+            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+          >
+            <NuxtImg
+              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+              src="/images/icon-fully-customizable.svg"
+              alt="fully-customizable"
+            />
+          </div>
+          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+            Fully Customizable
+          </h2>
+          <p class="text-md mt-4 font-medium text-gray-400">
+            Improve brand awareness and content discoverability through
+            customizable links, supercharging audience engagement.
+          </p>
         </div>
-        <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-          Fully Customizable
-        </h2>
-        <p class="text-md mt-4 font-medium text-gray-400">
-          Improve brand awareness and content discoverability through
-          customizable links, supercharging audience engagement.
-        </p>
+        <div>&nbsp</div>
       </div>
-      <div>&nbsp</div>
     </section>
     <section
       class="bg-[#35323e] bg-[url('/images/bg-boost-mobile.svg')] bg-cover bg-right-top bg-no-repeat py-20 text-center md:bg-[url('/images/bg-boost-desktop.svg')]"
