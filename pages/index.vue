@@ -416,12 +416,6 @@
                 mask-position: center;
               "
             />
-            <!-- <NuxtImg
-              class="h-6 w-6 cursor-pointer hover:brightness-[.49] hover:hue-rotate-[180deg] hover:saturate-[.66]"
-              v-for="link in socialLinks"
-              :alt="link"
-              :src="`/images/icon-${link}.svg`"
-            /> -->
           </div>
         </div>
       </div>
