@@ -261,82 +261,94 @@
             statistics dashboard.
           </p>
         </div>
-        <div
-          id="brand-recognition"
-          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-        >
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8 lg:text-left">
           <div
-            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+            id="brand-recognition"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
           >
-            <NuxtImg
-              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-              src="/images/icon-brand-recognition.svg"
-              alt="brand-recognition"
+            <div
+              class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
+            >
+              <NuxtImg
+                class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+                src="/images/icon-brand-recognition.svg"
+                alt="brand-recognition"
+              />
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+              Brand Recognition
+            </h2>
+            <p class="text-md mt-4 font-medium text-gray-400">
+              Boost your brand recognition with each click. Generic links don’t
+              mean a thing. Branded links help instil confidence in your
+              content.
+            </p>
+            <div
+              class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500 lg:hidden"
+            />
+            <div
+              class="absolute -right-12 top-1/2 hidden h-2 w-12 bg-cyan-500 lg:block"
             />
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-            Brand Recognition
-          </h2>
-          <p class="text-md mt-4 font-medium text-gray-400">
-            Boost your brand recognition with each click. Generic links don’t
-            mean a thing. Branded links help instil confidence in your content.
-          </p>
           <div
-            class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
-          />
-        </div>
-        <div
-          id="detailed-records"
-          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-        >
-          <div
-            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+            id="detailed-records"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 lg:top-10"
           >
-            <NuxtImg
-              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-              src="/images/icon-detailed-records.svg"
-              alt="detailed-records"
+            <div
+              class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
+            >
+              <NuxtImg
+                class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+                src="/images/icon-detailed-records.svg"
+                alt="detailed-records"
+              />
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+              Detailed Records
+            </h2>
+            <p class="text-md mt-4 font-medium text-gray-400">
+              Gain insights into who is clicking your links. Knowing when and
+              where people engage with your content helps inform better
+              decisions.
+            </p>
+            <div
+              class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500 lg:hidden"
+            />
+            <div
+              class="absolute -right-12 top-1/2 hidden h-2 w-12 bg-cyan-500 lg:block"
             />
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-            Detailed Records
-          </h2>
-          <p class="text-md mt-4 font-medium text-gray-400">
-            Gain insights into who is clicking your links. Knowing when and
-            where people engage with your content helps inform better decisions.
-          </p>
           <div
-            class="absolute -bottom-12 left-1/2 h-12 w-2 -translate-x-1/2 bg-cyan-500"
-          />
-        </div>
-        <div
-          id="fully-customizable"
-          class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
-        >
-          <div
-            class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700"
+            id="fully-customizable"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 lg:top-20"
           >
-            <NuxtImg
-              class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
-              src="/images/icon-fully-customizable.svg"
-              alt="fully-customizable"
-            />
+            <div
+              class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
+            >
+              <NuxtImg
+                class="w- absolute left-1/2 top-1/2 h-9 -translate-x-1/2 -translate-y-1/2 transform"
+                src="/images/icon-fully-customizable.svg"
+                alt="fully-customizable"
+              />
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-700">
+              Fully Customizable
+            </h2>
+            <p class="text-md mt-4 font-medium text-gray-400">
+              Improve brand awareness and content discoverability through
+              customizable links, supercharging audience engagement.
+            </p>
           </div>
-          <h2 class="text-2xl font-bold tracking-tight text-gray-700">
-            Fully Customizable
-          </h2>
-          <p class="text-md mt-4 font-medium text-gray-400">
-            Improve brand awareness and content discoverability through
-            customizable links, supercharging audience engagement.
-          </p>
+          <div>&nbsp</div>
         </div>
-        <div>&nbsp</div>
       </div>
     </section>
     <section
       class="bg-[#35323e] bg-[url('/images/bg-boost-mobile.svg')] bg-cover bg-right-top bg-no-repeat py-20 text-center md:bg-[url('/images/bg-boost-desktop.svg')]"
     >
-      <h2 class="text-2xl font-bold text-white">Boost your links today</h2>
+      <h2 class="text-2xl font-bold text-white lg:text-4xl">
+        Boost your links today
+      </h2>
       <UButton
         color="cyan"
         to="#shorten-link"
