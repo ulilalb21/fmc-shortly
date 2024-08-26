@@ -1,12 +1,69 @@
 <template>
   <nav class="fixed z-10 w-full bg-white">
-    <div class="container px-6 pb-4 pt-8">
+    <div class="container px-6 pb-4 pt-8 md:mx-auto md:pb-8 xl:px-0">
       <div class="relative flex items-center justify-between">
-        <NuxtImg src="/images/logo.svg" alt="shortly logo" class="h-8" />
-        <OnClickOutside @trigger="showNav = false">
+        <div class="flex items-center gap-8">
+          <NuxtImg src="/images/logo.svg" alt="shortly logo" class="h-8" />
+          <div class="hidden gap-2 text-gray-500 lg:flex">
+            <UButton
+              v-for="nav in topNav"
+              :key="nav"
+              variant="link"
+              size="md"
+              color="white"
+              to="#"
+              :ui="{
+                font: 'font-semibold',
+                color: {
+                  white: {
+                    link: 'hover:text-gray-700',
+                  },
+                },
+              }"
+            >
+              {{ nav }}
+            </UButton>
+          </div>
+        </div>
+        <div class="hidden gap-4 text-gray-500 lg:flex lg:items-center">
+          <div class="mt-2 border-t border-gray-600 lg:hidden" />
+          <UButton
+            class="mt-2"
+            variant="link"
+            size="md"
+            color="white"
+            to="#"
+            :ui="{
+              font: 'font-semibold',
+              color: {
+                white: {
+                  link: 'hover:text-gray-700',
+                },
+              },
+            }"
+          >
+            Login
+          </UButton>
+          <UButton
+            color="cyan"
+            class="mt-2"
+            size="md"
+            :ui="{
+              font: 'font-semibold',
+              rounded: 'rounded-full',
+              padding: {
+                base: 'py-4',
+              },
+            }"
+          >
+            Sign Up
+          </UButton>
+        </div>
+
+        <OnClickOutside @trigger="showNav = false" class="lg:hidden">
           <UIcon
             name="i-heroicons-bars-3"
-            class="h-10 w-10 cursor-pointer text-gray-400"
+            class="h-10 w-10 cursor-pointer text-gray-400 lg:hidden"
             @click="showNav = !showNav"
           />
           <div
@@ -56,49 +113,59 @@
     </div>
   </nav>
   <main class="pt-[104px]">
-    <NuxtImg
-      src="/images/illustration-working.svg"
-      alt="illustration"
-      class="h-[350px] w-full overflow-hidden object-cover object-left pl-6 md:h-[550px]"
-    />
-    <section class="bg-white px-4 pb-40 text-center">
-      <h2 class="mt-10 text-5xl font-bold tracking-tighter text-gray-700">
-        More than just shorter links
-      </h2>
-      <p class="mb-8 mt-4 text-lg font-medium text-gray-400">
-        Build your brand’s recognition and get detailed insights on how your
-        links are performing.
-      </p>
-      <UButton
-        to="#shorten-link"
-        class="text-white"
-        size="xl"
-        :ui="{
-          font: 'font-semibold tracking-wider',
-          rounded: 'rounded-full',
-          size: {
-            xl: 'text-lg',
-          },
-          padding: {
-            xl: 'py-4 px-10',
-          },
-        }"
-        >Get Started</UButton
+    <section
+      class="container mx-auto lg:flex lg:flex-row-reverse lg:items-center lg:px-6 lg:pb-28 xl:px-0"
+    >
+      <NuxtImg
+        src="/images/illustration-working.svg"
+        alt="illustration"
+        class="h-[350px] w-full overflow-hidden object-cover object-left pl-6 md:h-[550px] lg:h-full lg:w-full lg:overflow-auto lg:p-0"
+      />
+      <section
+        class="bg-white px-4 pb-40 text-center lg:w-4/5 lg:p-0 lg:text-left"
       >
+        <h2
+          class="mt-10 text-5xl font-bold tracking-tighter text-gray-700 lg:text-7xl"
+        >
+          More than just shorter links
+        </h2>
+        <p class="mb-8 mt-4 text-lg font-medium text-gray-400">
+          Build your brand’s recognition and get detailed insights on how your
+          links are performing.
+        </p>
+        <UButton
+          to="#shorten-link"
+          class="text-white"
+          size="xl"
+          color="cyan"
+          :ui="{
+            font: 'font-semibold tracking-wider',
+            rounded: 'rounded-full',
+            size: {
+              xl: 'text-lg',
+            },
+            padding: {
+              xl: 'py-4 px-10',
+            },
+          }"
+          >Get Started</UButton
+        >
+      </section>
     </section>
     <section class="relative bg-gray-100 px-6 text-center">
       <section
         id="shorten-link"
-        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6"
+        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6 md:-top-14 md:bg-[url('/images/bg-shorten-desktop.svg')] md:p-8"
       >
         <UForm
           ref="form"
+          class="md:flex md:flex-row md:items-start md:gap-4"
           @submit="submitLink"
           :state="state"
           :validate="validate"
           :validate-on="['submit']"
         >
-          <UFormGroup name="link" class="text-left italic">
+          <UFormGroup name="link" class="text-left italic md:basis-2/3">
             <UInput
               class="w-full"
               placeholder="Shorten a link here..."
@@ -114,9 +181,10 @@
             />
           </UFormGroup>
           <UButton
+            color="cyan"
             type="submit"
             block
-            class="mt-4"
+            class="mt-4 md:mt-0 md:basis-1/3"
             size="lg"
             :ui="{
               font: 'font-semibold tracking-wider',
@@ -136,18 +204,18 @@
         <div
           v-for="link in links"
           :key="link.result"
-          class="mt-6 rounded-lg bg-white"
+          class="mt-6 rounded-lg bg-white lg:flex lg:flex-row lg:items-center lg:p-6"
         >
-          <div class="border-b p-4">
+          <div class="border-b p-4 lg:basis-2/3 lg:border-b-0 lg:p-0">
             <div class="line-clamp-1">
               {{ link.source }}
             </div>
           </div>
-          <div class="px-4 pb-4 pt-4">
+          <div class="px-4 pb-4 pt-4 lg:basis-1/3 lg:p-0">
             <a
               :href="link.result"
               target="_blank"
-              class="line-clamp-1 text-cyan-500 hover:underline hover:decoration-cyan-500"
+              class="line-clamp-1 block text-cyan-500 hover:underline hover:decoration-cyan-500"
             >
               {{ link.result }}
             </a>
@@ -156,6 +224,7 @@
               v-slot="{ copied, copy, isSupported }"
             >
               <UButton
+                color="cyan"
                 block
                 size="lg"
                 :class="copied ? 'bg-gray-700 hover:bg-gray-600' : ''"
@@ -250,10 +319,11 @@
       <div>&nbsp</div>
     </section>
     <section
-      class="bg-[#35323e] bg-[url('/images/bg-boost-mobile.svg')] bg-cover bg-right-top bg-no-repeat py-20 text-center"
+      class="bg-[#35323e] bg-[url('/images/bg-boost-mobile.svg')] bg-cover bg-right-top bg-no-repeat py-20 text-center md:bg-[url('/images/bg-boost-desktop.svg')]"
     >
       <h2 class="text-2xl font-bold text-white">Boost your links today</h2>
       <UButton
+        color="cyan"
         to="#shorten-link"
         class="mt-6 text-white"
         size="xl"
