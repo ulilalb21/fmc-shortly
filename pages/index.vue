@@ -431,6 +431,37 @@
 import type { FormError, FormErrorEvent, FormSubmitEvent } from "#ui/types";
 import { OnClickOutside, UseClipboard } from "@vueuse/components";
 
+useSeoMeta({
+  title: "Shortly | Frontend Mentor Challenge",
+  ogTitle: "Shortly | Frontend Mentor Challenge",
+  description:
+    "This is a solution to the URL Shortening API Landing Page challenge on Frontend Mentor. Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+  ogDescription:
+    "This is a solution to the URL Shortening API Landing Page challenge on Frontend Mentor. Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+});
+
+useHead({
+  title: "Shortly | Frontend Mentor Challenge",
+  meta: [
+    {
+      name: "description",
+      content:
+        "This is a solution to the URL Shortening API Landing Page challenge on Frontend Mentor. Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+    },
+    {},
+  ],
+  htmlAttrs: {
+    lang: "en",
+  },
+  link: [
+    {
+      rel: "icon",
+      type: "image/png",
+      href: "/favicon.png",
+    },
+  ],
+});
+
 const footerLinks = {
   Features: ["Link Shortening", "Branded Links", "Analytics"],
   Resources: ["Blog", "Developers", "Support"],
