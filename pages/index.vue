@@ -153,53 +153,55 @@
       </section>
     </section>
     <section class="relative bg-gray-100 px-6 text-center">
-      <section
-        id="shorten-link"
-        class="absolute -top-20 left-1/2 w-[calc(100vw-3rem)] -translate-x-1/2 scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6 md:-top-14 md:bg-[url('/images/bg-shorten-desktop.svg')] md:p-8 lg:scroll-mt-28 lg:p-10"
-      >
-        <UForm
-          ref="form"
-          class="md:flex md:flex-row md:items-start md:gap-4"
-          @submit="submitLink"
-          :state="state"
-          :validate="validate"
-          :validate-on="['submit']"
+      <div class="container relative mx-auto">
+        <section
+          id="shorten-link"
+          class="absolute -top-20 w-full scroll-mt-24 rounded-xl bg-[#35323e] bg-[url('/images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat p-6 shadow md:-top-14 md:bg-[url('/images/bg-shorten-desktop.svg')] md:p-8 lg:scroll-mt-28 lg:p-10"
         >
-          <UFormGroup name="link" class="text-left italic md:basis-full">
-            <UInput
-              class="w-full"
-              placeholder="Shorten a link here..."
-              color="white"
-              variant="outline"
-              size="xl"
+          <UForm
+            ref="form"
+            class="md:flex md:flex-row md:items-start md:gap-4"
+            @submit="submitLink"
+            :state="state"
+            :validate="validate"
+            :validate-on="['submit']"
+          >
+            <UFormGroup name="link" class="text-left italic md:basis-full">
+              <UInput
+                class="w-full"
+                placeholder="Shorten a link here..."
+                color="white"
+                variant="outline"
+                size="xl"
+                :ui="{
+                  variant: {
+                    outline: 'bg-white placeholder-{color}-300',
+                  },
+                }"
+                v-model="state.link"
+              />
+            </UFormGroup>
+            <UButton
+              color="cyan"
+              type="submit"
+              block
+              class="mt-4 md:mt-0 md:basis-[190px]"
+              size="lg"
               :ui="{
-                variant: {
-                  outline: 'bg-white placeholder-{color}-300',
+                font: 'font-semibold tracking-wider',
+                size: {
+                  lg: 'text-lg',
+                },
+                padding: {
+                  lg: 'py-2 px-10',
                 },
               }"
-              v-model="state.link"
-            />
-          </UFormGroup>
-          <UButton
-            color="cyan"
-            type="submit"
-            block
-            class="mt-4 md:mt-0 md:basis-[190px]"
-            size="lg"
-            :ui="{
-              font: 'font-semibold tracking-wider',
-              size: {
-                lg: 'text-lg',
-              },
-              padding: {
-                lg: 'py-2 px-10',
-              },
-            }"
-          >
-            Shorten It!
-          </UButton>
-        </UForm>
-      </section>
+            >
+              Shorten It!
+            </UButton>
+          </UForm>
+        </section>
+      </div>
       <div
         v-if="links.length"
         class="container mx-auto pt-20 text-left text-lg font-semibold"
@@ -207,7 +209,7 @@
         <div
           v-for="link in links"
           :key="link.result"
-          class="mt-6 rounded-lg bg-white lg:flex lg:flex-row lg:items-center lg:p-6 lg:py-4"
+          class="mt-6 rounded-lg bg-white shadow lg:flex lg:flex-row lg:items-center lg:p-6 lg:py-4"
         >
           <div class="border-b p-4 lg:basis-full lg:border-b-0 lg:p-0">
             <div class="line-clamp-1">
@@ -256,15 +258,17 @@
           <h2 class="text-3xl font-bold tracking-tighter text-gray-700">
             Advanced Statistics
           </h2>
-          <p class="text-md mx-auto mt-6 w-[450px] font-medium text-gray-400">
+          <p
+            class="text-md mx-auto mt-6 font-medium text-gray-400 lg:w-[450px]"
+          >
             Track how your links are performing across the web with our advanced
             statistics dashboard.
           </p>
         </div>
-        <div class="lg:grid lg:grid-cols-3 lg:gap-8 lg:text-left">
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8 lg:pb-32 lg:text-left">
           <div
             id="brand-recognition"
-            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 shadow lg:mb-0"
           >
             <div
               class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
@@ -292,7 +296,7 @@
           </div>
           <div
             id="detailed-records"
-            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 lg:top-10"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 shadow lg:top-10 lg:mb-0"
           >
             <div
               class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
@@ -320,7 +324,7 @@
           </div>
           <div
             id="fully-customizable"
-            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 lg:top-20"
+            class="relative mb-20 rounded-lg bg-white px-6 pb-10 pt-16 shadow lg:top-20 lg:mb-0"
           >
             <div
               class="absolute -top-10 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-gray-700 lg:left-6 lg:translate-x-0"
